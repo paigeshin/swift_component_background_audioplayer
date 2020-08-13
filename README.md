@@ -1,5 +1,5 @@
 ```swift   
-   /*** Set up Background Music Player, it will be used with image ***/
+    /*** Set up Background Music Player, it will be used with image ***/
     //arg1: Network
     //arg2, arg3: Local
     //arg4: Common
@@ -46,9 +46,9 @@
         //이유는 간단함. NSNotification.Name.AVPlayerItemDidPlayToEndTime은 모든 AVPlayer의 event를 관찰하는 애들임.
         //AVQueuePlayer가 끝날 때마다, background audio player도 영향을 받게 되어있다.
         //object를 지정해줘야한다. object는 item이여야 한다.
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: backgroundAudioPlayer?.currentItem, queue: .main) { notification in
-            self.backgroundAudioPlayer?.seek(to: CMTime.zero)
-            self.backgroundAudioPlayer?.play()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: backgroundAudioPlayer?.currentItem, queue: .main) { [weak self] notification in
+            self?.backgroundAudioPlayer?.seek(to: CMTime.zero)
+            self?.backgroundAudioPlayer?.play()
         }
         
     }
